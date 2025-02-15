@@ -1,5 +1,6 @@
 import re
 import sys
+import urllib.robotparser
 from urllib.parse import urlparse
 
 import requests
@@ -29,6 +30,7 @@ def avoid_robots_disallow(config: Config, other: OtherConfig):
     """Check if the robots.txt allows the download"""
     url = config.api or config.index
     exit_ = False
+    bot = urllib.robotparser.RobotFileParser()
     try:
         # Don't use the session.get() method here, since we want to avoid the session's retry logic
         r = requests.get(
@@ -36,7 +38,8 @@ def avoid_robots_disallow(config: Config, other: OtherConfig):
             cookies=other.session.cookies, headers=other.session.headers, verify=other.session.verify, proxies=other.session.proxies
         )
         if r.status_code == 200:
-            if 'user-agent: wikiteam3\ndisallow: /' in r.text.lower():
+            bot.parse(r.text.splitlines())
+            if not bot.can_fetch('wikiteam3', '/') and 'wikiteam3' in r.text:
                 print('This wiki not allow wikiteam3 to archive.')
                 exit_ = True
     except Exception as e:
