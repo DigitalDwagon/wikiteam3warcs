@@ -1,3 +1,20 @@
+# WikiTeam3 internal
+
+## Images.txt structure
+
+```python
+filename + "\t" + url + "\t" + uploader
++ "\t" + (str(size) if size else NULL)
++ "\t" + (str(sha1) if sha1 else NULL)
++ "\t" + (timestamp if timestamp else NULL)
++ "\n"
+```
+
+*optional fields:
+- "null" (magic None value, since wikiteam3 v4.0.0)
+- "False" (magic None value, before wikiteam3 v4.0.0)
+- not present (ancient wikiteam3 versions)
+
 # Snippets
 
 ## API Output format
@@ -69,4 +86,4 @@ wikiteam3 workaround: https://github.com/saveweb/wikiteam3/commit/fd5a02a649dcf3
 https://docs.openssl.org/1.1.1/man1/ciphers/
 https://docs.openssl.org/master/man1/openssl-ciphers/
 
-workaround: https://github.com/DigitalDwagon/wikiteam3/blob/8a054882de19c6b69bc03798d3044b7b5c4c3c88/wikiteam3/utils/monkey_patch.py#L63-L84
+wikiteam3 workaround: https://github.com/saveweb/wikiteam3/blob/8a054882de19c6b69bc03798d3044b7b5c4c3c88/wikiteam3/utils/monkey_patch.py#L63-L84

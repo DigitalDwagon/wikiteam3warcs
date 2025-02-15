@@ -1,13 +1,9 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from urllib.parse import urlparse
+
 import requests
-from wikiteam3.dumpgenerator.config import Config, OtherConfig
+from wikiteam3.dumpgenerator.config import Config
 from wikiteam3.utils.wiki_avoid import avoid_robots_disallow
-
-# filepath: wikiteam3/utils/test_wiki_avoid.py
-
-
 
 
 class TestAvoidRobotsDisallow(unittest.TestCase):
